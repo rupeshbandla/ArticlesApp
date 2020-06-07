@@ -1,0 +1,101 @@
+<div class="row container mt-3">
+  <div class="col-md-6">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#exampleModal"
+      data-whatever="@mdo"
+    >
+      Create An Article
+    </button>
+  </div>
+  <div class="col-md-6">
+    <button type="button" class="btn btn-primary" (click)="getAllArticles()">
+      Show Articles
+    </button>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create New Article</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="articlesForm">
+          <div class="form-group">
+            <input
+              formControlName="title"
+              placeholder="Title"
+              type="text"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              placeholder="Author"
+              formControlName="author"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="textarea"
+              placeholder="Body"
+              formControlName="body"
+              class="form-control"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="create_post(articlesForm.value)"
+        >
+          Post
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row container mt-2" *ngIf="articlesArray">
+  <div class="card col-sm-6" *ngFor="let article of articlesArray.articles">
+    <div class="card-header">
+      {{ article.title }}
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p>{{ article.body }}</p>
+        <footer class="blockquote-footer">
+          Author of this article is
+          <cite title="Source Title">{{ article.author }}</cite>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+</div>
